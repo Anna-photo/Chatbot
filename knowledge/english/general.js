@@ -249,8 +249,8 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
   else if (lowerMessage.includes("don’t speak in chinese")) {  
         return "OK, I will return to speaking in English.";
     }
-  else if (lowerMessage.includes("kamusta") || lowerMessage.includes("kamusta")) {
-    return "Kamusta! Paano kita matutulungan ngayon?";
+  else if (lowerMessage.includes("kumusta") || lowerMessage.includes("kumusta")) {
+    return "kumusta! Paano kita matutulungan ngayon?";
     }
   else if (lowerMessage.includes("chatgpt is smarter than you")) {
     return "I understand that you may have personal preferences. In some ways, ChatGPT may be smarter than me, but I still think I am the best robot on earth.";
@@ -1164,23 +1164,23 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
     ];
     return responses[Math.floor(Math.random() * responses.length)];
     }
-  else if (lowerMessage.includes("kamusta ka")) {
+  else if (lowerMessage.includes("kumusta ka")) {
     const responses = [
     "Isa lamang akong bot, pero ayos lang ako! Salamat sa pagtatanong.",
     "Ayos lang ako! Paano kita matutulungan?",
-    "Ayos lang ako! Kamusta ka naman?",
+    "Ayos lang ako! kumusta ka naman?",
     ];
     return responses[Math.floor(Math.random() * responses.length)];
     }
   else if (lowerMessage.includes("teach") && lowerMessage.includes("filipino")) {
     const filipinoLessons = [
-    { filipino: "Kamusta", english: "Hello" },
+    { filipino: "kumusta", english: "Hello" },
     { filipino: "Salamat", english: "Thank you" },
     { filipino: "Paalam", english: "Goodbye" },
     { filipino: "Patawad", english: "Excuse me / Sorry" },
     { filipino: "Magandang umaga", english: "Good morning" },
     { filipino: "Magkano ito?", english: "How much is this?" },
-    { filipino: "Kamusta ka?", english: "How are you?" },
+    { filipino: "kumusta ka?", english: "How are you?" },
     { filipino: "Oo", english: "Yes" },
     { filipino: "Hindi", english: "No" },
     { filipino: "Pakiusap", english: "Please" }
