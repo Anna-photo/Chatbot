@@ -13,17 +13,25 @@ overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  width: 400px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   z-index: 30;
   background: white;
-  border-radius: 12px;
+  border-radius: 0;
   display: none;
   padding: 20px;
   box-sizing: border-box;
   overflow: hidden;
 }
-.feedback-button {
+
+#feedbackFormContainer iframe,
+#knowledgeFormContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  background: white;
+}.feedback-button {
 display: inline-block;
 padding: 10px 20px;
 background-color: #0078d4;
@@ -50,21 +58,22 @@ display: none; /* Hidden by default */
 
 #feedbackPage {
 padding: 10px;
-background-color: #add8e6; /* Light blue background */
-border-radius: 8px;
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-width: 400px; /* Matches chatbox width */
-height: 600px; /* Matches chatbox height */
-margin: 0 auto; /* Center horizontally */
+background-color: #add8e6;
+border-radius: 0;
+box-shadow: none;
+width: 100vw;
+height: 100vh;
+margin: 0;
 display: flex;
 flex-direction: column;
-justify-content: center; /* Center content inside */
+justify-content: center;
 align-items: center;
-position: absolute;
+position: fixed;
 top: 50%;
 left: 50%;
-transform: translate(-50%, -50%); /* Center the form vertically and horizontally */
-z-index: 1000; /* Sit on top of the overlay */
+transform: translate(-50%, -50%);
+z-index: 1000;
+box-sizing: border-box;
 }
 #feedbackPage iframe {
 width: 100%;
@@ -670,10 +679,10 @@ margin-right: 5px;
 }
 
 #reportOverlayContent {
-  width: 400px;               /* Same width as chatbot */
-  height: 600px;              /* Same height as chatbot */
-  background: #ffffff;        /* White background */
-  border-radius: 12px;        /* Same border radius */
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  border-radius: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Same subtle shadow */
   display: flex;
   flex-direction: column;
