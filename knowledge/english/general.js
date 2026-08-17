@@ -338,6 +338,9 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
   else if (lowerMessage.includes("do you have any opinion")) {
     return `Since I am a robot, I do not really have opinions. However, I have one opinion – I am the smartest robot on earth.`;
     }
+    else if (lowerMessage.includes("you fly")) {
+    return `I am a robot. I don't have a body or wings!😄✈️`;
+    }
   else if (lowerMessage.includes("do you have opinion")) {
     return `Since I am a robot, I do not really have opinions. However, I have one opinion – I am the smartest robot on earth.`;
     }
