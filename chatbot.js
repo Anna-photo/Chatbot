@@ -1348,36 +1348,25 @@ chatFooter.style.display = "none";
 chatMessages.style.display = "none";
 callOverlay.style.display = "flex";
 callStatus.innerText = "Connecting...";
-
-// Start the stopwatch immediately when the call begins
-startStopwatch();
-
 playBeep(1000, 440, 0.5, "sine", () => {
 startSpeechRecognition();
 });
 };
+
 // Stop call mode and play a short beep (500ms) on end.
 const stopCallMode = () => {
 callMode = false;
-
-if (recognition) {
-recognition.stop();
-}
-
-// Stop the stopwatch
-stopStopwatch();
-
+if (recognition) recognition.stop();
 // Stop any ongoing speech by the bot
 window.speechSynthesis.cancel();
-
 callOverlay.style.display = "none";
 chatMessages.style.display = "flex";
 chatFooter.style.display = "flex";
-
 playBeep(500, 660, 0.5, "sine", () => {
 addMessage("Call ended.", "bot-message", true);
 });
 };
+
 // Toggle call mode when clicking the call button.
 callButton.addEventListener("click", () => {
 if (!callMode) {
@@ -1389,7 +1378,9 @@ callButton.innerText = "Call";
 endCallButton.addEventListener("click", () => {
 stopCallMode();
 callButton.innerText = "Call";
-});// ----------------------------
+stopStopwatch();
+});
+// ----------------------------
 // Image Analysis Functions
 // ----------------------------
 function guessFromFilename(filename) {
@@ -1629,6 +1620,28 @@ const durationText =
 (seconds < 10 ? "0" + seconds : seconds);
 document.getElementById("callStatus").textContent = durationText; // <-- FIXED: This now updates correctly
 }
+document.addEventListener('DOMContentLoaded', function () {
+// Ensure the Call button resets the stopwatch properly
+var callButton = document.getElementById("callButton");
+
+if (callButton) {
+callButton.addEventListener("click", () => {
+console.log("User started a call! Resetting stopwatch..."); // Debugging log
+
+callMode = true;
+callOverlay.style.display = "flex";
+callStatus.textContent = "Connecting";
+
+// Force stopwatch reset before starting a new one
+clearInterval(stopwatchInterval);
+document.getElementById("stopwatch").textContent = "00:00";
+
+startStopwatch(); // <-- Ensures a fresh stopwatch start every time
+});
+} else {
+console.error("Call button not found! Make sure the button exists in the HTML.");
+}
+});
 // ───── Helper: Show the report overlay ─────
 function showReportOverlay() {
   document.getElementById('reportOverlay').style.display = 'block';
@@ -1747,5 +1760,3 @@ function openFeedbackForm() {
     </html>
   `);
 }
-
-
