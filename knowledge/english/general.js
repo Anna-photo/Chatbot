@@ -106,6 +106,7 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
   else if (lowerMessage.includes("hornet") && lowerMessage.includes("sting") && lowerMessage.includes("me")) {
       return "Ouch! That hurts. I hope you feel better soon.";
     }
+    
   else if (lowerMessage.includes("hornet") && lowerMessage.includes("sting") && lowerMessage.includes("i")) {
       return "Ouch! That hurts. I hope you feel better soon.";
     }
@@ -134,6 +135,15 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
         "Yikes. If you're not already receiving treatment for rabies,<br>please stop what you're doing and get to a medical center right away.<br><br>It is preventable—but only if addressed early.",
       ];
       return responses[Math.floor(Math.random() * responses.length)];
+    }
+     else if (lowerMessage.includes("tell") && lowerMessage.includes("it") && lowerMessage.includes("about")) {
+      return "Sure, but I want to make sure I answer your question correctly. Please clarify what you want me to tell you about!";
+    }
+       else if (lowerMessage.includes("teach") && lowerMessage.includes("it") && lowerMessage.includes("about")) {
+      return "Sure, but I want to make sure I answer your question correctly. Please clarify what you want me to tell you about!";
+    }
+         else if (lowerMessage.includes("talk") && lowerMessage.includes("it") && lowerMessage.includes("about")) {
+      return "Sure, but I want to make sure I answer your question correctly. Please clarify what you want me to tell you about!";
     }
   else if (
       lowerMessage.includes("halo") ||
