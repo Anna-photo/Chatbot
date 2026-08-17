@@ -2537,7 +2537,7 @@ window.registerKnowledgeModule({ language: 'english', category: 'general', run: 
     return "Since I am just a bot, I don’t have any beliefs or opinions. However, I can tell you that from all the evidence that there is, aliens do not exist. What about you? What do you think?";
     }
   else if (lowerMessage.includes("dim sum")) {
-    return "A variety of bite-sized Cantonese dishes, including dumplings, buns, and pastries, typically served with tea. <br><br><img src='https://media.cnn.com/api/v1/images/stellar/prod/160325033254-hk-dim-sum-fook-lam-moon.jpg?q=w_4256,h_2456,x_0,y_0,c_fill' alt='Dim Sum' width='200'>";
+    return "Dim sum is a variety of bite-sized Cantonese dishes, including dumplings, buns, and pastries, typically served with tea. <br><br><img src='https://media.cnn.com/api/v1/images/stellar/prod/160325033254-hk-dim-sum-fook-lam-moon.jpg?q=w_4256,h_2456,x_0,y_0,c_fill' alt='Dim Sum' width='200'>";
     }
   else if (lowerMessage.includes("shh")) {
     return "It sounds like you’re telling me to be quiet.";
