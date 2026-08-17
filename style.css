@@ -4,10 +4,9 @@ font-family: Arial, sans-serif;
 background: #f9fafb;
 margin: 0;
 padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
+width: 100%;
 height: 100vh;
+overflow: hidden;
 }
 #feedbackFormContainer,
 #knowledgeFormContainer {
@@ -304,17 +303,16 @@ color: black;
 opacity: 1; /* Ensure it's fully visible */
 }
 .chatbot-container {
-width: 400px;
-height: 600px;
+width: 100vw;
+height: 100vh;
 background: #ffffff;
-border-radius: 12px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+border-radius: 0;
+box-shadow: none;
 display: flex;
 flex-direction: column;
 overflow: hidden;
 position: relative;
-}
-/* Header */
+}/* Header */
 .chat-header {
 position: relative;
 background: linear-gradient(90deg, #0078d4, #0056a4);
