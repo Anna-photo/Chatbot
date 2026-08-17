@@ -550,27 +550,15 @@ document
       })
       .catch(err => {
         content.innerHTML = `
-          <h2 style="text-align:center;font-size:24px;font-weight:bold;color:#2c2c2c;">What's New in Version 6.7</h2>
+          <h2 style="text-align:center;font-size:24px;font-weight:bold;color:#2c2c2c;">What's New in Version 7.0</h2>
           <p style="font-family:Arial,sans-serif;font-size:16px;color:#444;line-height:1.6;margin:20px 0;">
-            <strong style="color:#0056a1;">✅ New Language Support</strong><br><br>
-• Chatbot now supports Cantonese and Bahasa Indonesia<br><br>
-
-<strong style="color:#0056a1;">✅ Two Way Conversations</strong><br><br>
-• Chatbot is now capable of more advanced two way conversations for certain topics<br><br>
-
-<strong style="color:#0056a1;">✅ Improved Layout</strong><br><br>
-• New chatbot settings page<br>
-• Chatbot info page is now located in info tab of settings<br><br>
-
+            <strong style="color:#0056a1;">✅ Online Chatbot</strong><br><br>
+• Chatbot now runs online instead of as a local file<br><br>
 <strong style="color:#0056a1;">✅ Knowledge Expansion</strong><br><br>
 • More knowledge added to the chatbot<br><br>
 
 <strong style="color:#0056a1;">✅ Fixed Known Issues</strong><br><br>
-• Fixed known issues with certain requests<br>
-• Fixed known issue with speaking certain messages<br><br>
-
-<strong style="color:#0056a1;">🆕 New Functions Added</strong><br><br>
-• Users can now clear chat messages<br><br>
+• Fixed known issues with certain requests<br><br>
 
 </p>
 <p style="text-align:center;font-size:13px;color:gray;">
