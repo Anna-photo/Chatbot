@@ -1,0 +1,718 @@
+
+body {
+font-family: Arial, sans-serif;
+background: #f9fafb;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+#feedbackFormContainer,
+#knowledgeFormContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 600px;
+  z-index: 30;
+  background: white;
+  border-radius: 12px;
+  display: none;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.feedback-button {
+display: inline-block;
+padding: 10px 20px;
+background-color: #0078d4;
+color: #fff;
+text-decoration: none;
+border-radius: 8px;
+transition: background-color 0.3s;
+margin-top: 20px;
+}
+.feedback-button:hover {
+background-color: #0056a4;
+}
+#feedbackOverlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+z-index: 999; /* Ensure it sits above all other elements */
+display: none; /* Hidden by default */
+}
+
+
+#feedbackPage {
+padding: 10px;
+background-color: #add8e6; /* Light blue background */
+border-radius: 8px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+width: 400px; /* Matches chatbox width */
+height: 600px; /* Matches chatbox height */
+margin: 0 auto; /* Center horizontally */
+display: flex;
+flex-direction: column;
+justify-content: center; /* Center content inside */
+align-items: center;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%); /* Center the form vertically and horizontally */
+z-index: 1000; /* Sit on top of the overlay */
+}
+#feedbackPage iframe {
+width: 100%;
+height: 100%;
+border: none;
+}
+#whatsNewContent {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  overflow: hidden;      /* ← kills any internal scrollbars */
+  overflow-y: auto;
+}
+
+#whatsNewContent h1,
+#whatsNewContent h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #111;
+}
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #0078d4;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #0078d4; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #0056a4; /* Darker blue on hover */
+}
+
+#whatsNewContent ul {
+  padding-left: 1.2em;
+}
+
+#whatsNewContent li {
+  margin-bottom: 0.5em;
+}
+#closeWhatsNewBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d; /* Red close button */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; /* Ensure it stays above the iframe */
+}
+
+#closeWhatsNewBtn:hover {
+  background: #cc0000; /* Darker red on hover */
+}
+#whatsNewOverlay {
+  display: none;
+  position: absolute;    /* ← fill the parent .chatbot-container only */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 30;
+  overflow: hidden;      /* ← no scrollbars on the overlay itself */
+}
+/* Inner container for embedded doc */
+#whatsNewOverlay .chatbot-container {
+  width: 100%;
+  height: 100%;
+  background: white; /* Match chatbot background */
+  border-radius: 0;   /* Match chatbot (if chatbot has no border radius) */
+  box-shadow: none;   /* Remove shadow if chatbot doesn’t use it */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.25); /* 👈 Zoom factor (1.25 = 125%) */
+  transform-origin: top left;
+  overflow: hidden;
+  position: relative;
+}
+
+#whatsNewIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  transform: scale(0.8); /* 👈 Optional: fine-tune based on preview scaling */
+  transform-origin: top left;
+  pointer-events: auto;
+}
+
+
+/* Incoming Call Popup Styles */
+#incomingCallPopup {
+background: #ffffff;
+border: 1px solid #ccc;
+border-radius: 8px;
+padding: 10px 20px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.popup-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.popup-header {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 10px;
+}
+.phone-icon {
+font-size: 30px;
+}
+.popup-title {
+font-weight: bold;
+font-size: 18px;
+}
+.popup-actions {
+display: flex;
+gap: 20px;
+}
+.accept-button, .decline-button {
+width: 40px;
+height: 40px;
+border: none;
+border-radius: 50%;
+color: #fff;
+font-size: 20px;
+cursor: pointer;
+}
+.accept-button {
+background-color: #4CAF50; /* Green */
+}
+.decline-button {
+background-color: red; /* Red */
+}
+/* Hover effect for Accept Button (slightly darker green) */
+.accept-button:hover {
+background-color: #45a049; /* Darker green */
+}
+
+/* Hover effect for Decline Button (slightly darker red) */
+.decline-button:hover {
+background-color: #d32f2f; /* Darker red */
+}
+
+#closeFeedback {
+position: absolute;
+top: 10px;
+right: 20px;
+font-size: 30px;
+color: white; /* White X */
+background-color: #007bff; /* Blue circle background */
+border-radius: 50%; /* Make it circular */
+width: 40px; /* Adjust width */
+height: 40px; /* Adjust height */
+display: flex;
+align-items: center; /* Center the X */
+justify-content: center; /* Center the X */
+cursor: pointer;
+border: none;
+padding: 0;
+}
+#feedbackButtonInsideInfo {
+background-color: #4CAF50; /* Green button */
+color: white;
+padding: 8px 16px; /* Reduced padding to shrink the button */
+text-align: center;
+text-decoration: none;
+display: block; /* Makes it easier to center */
+font-size: 14px; /* Reduced font size */
+margin: 20px auto; /* Center button */
+border-radius: 8px;
+cursor: pointer;
+width: fit-content; /* Adjusts to content size */
+}
+.empty-chat-message {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+color: black;
+opacity: 1; /* Ensure it's fully visible */
+}
+.chatbot-container {
+width: 400px;
+height: 600px;
+background: #ffffff;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+display: flex;
+flex-direction: column;
+overflow: hidden;
+position: relative;
+}
+/* Header */
+.chat-header {
+position: relative;
+background: linear-gradient(90deg, #0078d4, #0056a4);
+color: white;
+padding: 15px;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+}
+.header-center {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+/* Special container for action buttons (call and info) */
+.action-buttons {
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+display: flex;
+gap: 10px;
+}
+.action-buttons .header-button {
+position: static;
+transform: none;
+background: #ffffff33;
+border: none;
+color: white;
+padding: 5px 10px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 14px;
+}
+/* Chat messages (text mode) */
+.chat-messages {
+flex-grow: 1;
+padding: 15px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+background: #f3f4f6;
+position: relative;
+}
+/* Call overlay */
+#callOverlay {
+display: none;
+position: absolute;
+top: 0; left: 0;
+width: 100%;
+height: 100%;
+background: #f3f4f6;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 10;
+}
+/* Info page overlay */
+#settingsPage {
+display: none;
+position: absolute;
+top: 0; left: 0;
+width: 100%;
+height: 100%;
+background: #ffffff;
+z-index: 20;
+padding: 20px;
+box-sizing: border-box;
+overflow-y: auto;
+}
+#settingsPage h2 {
+margin-top: 0;
+}
+#settingsPage .close-settings {
+position: absolute;
+top: 10px;
+right: 10px;
+background: #0078d4;
+color: white;
+border: none;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+cursor: pointer;
+font-size: 16px;
+}
+/* Call overlay styling */
+#callOverlay .call-icon {
+font-size: 80px;
+margin-bottom: 20px;
+}
+#callOverlay .call-status {
+font-size: 24px;
+margin-bottom: 20px;
+}
+/* Language dropdown styling */
+/* Compact Enhanced Language Dropdown Styling */
+#callOverlay select.lang-select {
+padding: 6px 10px; /* Reduced padding for a smaller dropdown */
+font-size: 14px; /* Smaller font size */
+margin-bottom: 15px;
+border: 1px solid #0078d4; /* Primary color for the border */
+border-radius: 4px; /* Subtle rounded corners */
+background-color: #f3f4f6; /* Light background */
+color: #333; /* Dark text for contrast */
+transition: border-color 0.3s ease; /* Smooth border transition */
+width: auto; /* Auto width based on content */
+max-width: 220px; /* Maximum width */
+}
+
+/* Hover effect for the dropdown */
+#callOverlay select.lang-select:hover {
+border-color: #0056a4; /* Darker border on hover */
+}
+
+/* Focus effect for better accessibility */
+#callOverlay select.lang-select:focus {
+outline: none;
+border-color: #0078d4; /* Highlight border on focus */
+box-shadow: 0 0 5px rgba(0, 120, 212, 0.5); /* Soft shadow effect */
+}
+
+/* End Call button styled in red */
+#callOverlay .end-call-button {
+padding: 10px 20px;
+background: red;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+cursor: pointer;
+}
+/* Lighter dark red when button is hovered */
+#callOverlay .end-call-button:hover {
+background: #d32f2f; /* Slightly darker red on hover */
+}
+/* Chat message styles (text mode) */
+.message-wrapper {
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+margin: 8px 0;
+}
+.message {
+max-width: 80%;
+padding: 15px 20px;
+border-radius: 12px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+background: #f9fafb;
+}
+.user-message {
+  position: relative;
+  margin-left: auto;
+  background: #0078d4;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.user-message::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: #0078d4;
+  border-radius: 50%;
+  clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+}
+
+.user-message::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #0078d4;
+}
+.bot-message {
+  position: relative;
+  margin-right: auto;
+  background: #e5e7eb;
+  color: #333;
+  padding: 15px 20px;
+  border-radius: 16px;
+  max-width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.bot-message::after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 50%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+}
+.bot-message::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #e5e7eb;
+}
+.voice-button {
+background: none;
+border: none;
+cursor: pointer;
+font-size: 20px;
+color: #0078d4;
+margin-left: 10px;
+}
+.voice-button:hover {
+color: #0056a4;
+}
+.typing-indicator {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+padding: 15px 20px;
+margin: 8px 0;
+border-radius: 12px;
+background: #e5e7eb;
+color: #aaa;
+max-width: 80%;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.stopwatch-style {
+font-size: 16px; /* Make it smaller */
+font-weight: bold; /* Optional: Make it bold */
+position: relative;
+top: -10px; /* Move it higher */
+text-align: center;
+}
+.typing-indicator span {
+display: inline-block;
+width: 8px;
+height: 8px;
+margin: 0 2px;
+background: #aaa;
+border-radius: 50%;
+animation: bounce 1.2s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+0%, 80%, 100% { transform: scale(0); }
+40% { transform: scale(1); }
+}
+/* Chat footer (text mode) */
+.chat-footer {
+display: flex;
+flex-direction: column;
+border-top: 1px solid #e5e7eb;
+padding: 10px;
+background: #f9fafb;
+}
+.footer-input-container {
+display: flex;
+align-items: center;
+width: 100%;
+}
+.input-box {
+flex-grow: 1;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px 15px;
+font-size: 16px;
+}
+.input-box:focus { outline: none; border-color: #0078d4; }
+.send-button {
+margin-left: 10px;
+background: #0078d4;
+color: white;
+border: none;
+border-radius: 8px;
+padding: 10px 15px;
+font-size: 16px;
+cursor: pointer;
+transition: background 0.3s;
+}
+.send-button:hover { background: #0056a4; }
+.upload-button {
+margin-left: 5px;
+background: none;
+border: none;
+cursor: pointer;
+font-size: 20px;
+}
+#attachedFilePreview {
+margin: 5px 0;
+display: flex;
+align-items: center;
+}
+#attachedFilePreview img {
+max-width: 50px;
+max-height: 50px;
+margin-right: 5px;
+border-radius: 8px;
+border: 1px solid #ddd;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.upload-spinner {
+display: inline-block;
+width: 24px;
+height: 24px;
+border: 4px solid #ccc;
+border-top: 4px solid #0078d4;
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin-right: 5px;
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* ───── Report-Issue Button (inline, small) ───── */
+.report-button {
+  display: inline-block;
+  margin-top: 0.5rem;       /* about two “line” breaks worth of space */
+  font-size: 0.75rem;       /* slightly smaller than normal text */
+  color: #0056a4;           /* dark blue link color */
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.report-button:hover {
+  color: #0078d4;           /* lighter blue on hover */
+}
+
+/* ───── Overlay That Holds the Embedded Form ───── */
+#reportOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* NO background-color here — no dimming */
+  z-index: 999; /* Ensure it sits above other elements */
+  display: none; /* Hidden by default */
+}
+
+#reportOverlayContent {
+  width: 400px;               /* Same width as chatbot */
+  height: 600px;              /* Same height as chatbot */
+  background: #ffffff;        /* White background */
+  border-radius: 12px;        /* Same border radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Same subtle shadow */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center perfectly */
+  z-index: 1000;
+  padding: 0;                /* Remove extra padding to align perfectly */
+}
+#reportOverlayContent iframe {
+  flex: 1;                   /* Fill the container fully */
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+#closeReport {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white; /* White X */
+  background-color: #007bff; /* Blue circle background */
+  border-radius: 50%; /* Circular shape */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+#closeReport:hover {
+  background-color: #cc0000; /* Red on hover */
+}
